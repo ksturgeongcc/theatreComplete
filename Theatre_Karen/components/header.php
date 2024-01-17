@@ -5,8 +5,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     // for use on laptop
-    define('ROOT_DIR', 'http://localhost:8040//Theatre_Karen_READY/Theatre_Karen/');
-    define('AUTH_DIR', 'http://localhost:8040//Theatre_Karen_READY/Theatre_Karen/account/dashboard/');
+    define('ROOT_DIR', 'http://localhost//theatreComplete/Theatre_Karen/');
+    define('AUTH_DIR', 'http://localhost//theatreComplete/Theatre_Karen//account/dashboard/');
 // for use on college pc in room 13
     // define('ROOT_DIR', 'http://localhost/theatreV1/');
     // define('AUTH_DIR', 'http://localhost/theatreV1/account/dashboard/');

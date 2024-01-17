@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form action="../account/dashboard/admin/config/addBlogConfig.php" method="post">
+      <form action="../account/dashboard/admin/config/addBlogConfig.php" method="post" enctype="multipart/form-data" >
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
           Blog Information
         </h6>
@@ -69,9 +69,8 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-            ADD BLOG
-        </button>
+        <input type="submit" name="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+          
         <hr class="mt-6 border-b-1 border-blueGray-300">
 
       </form>
@@ -80,4 +79,3 @@
 </div>
 </section>
 <?php include '../../../../components/footer.php'; ?>
-
