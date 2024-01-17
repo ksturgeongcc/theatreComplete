@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+/* Set no margin and padding around body. Set height to take up entire screen height. Align everything to the center, both horizontally and vertically */
+/* Remove border and outline around input. Set width to take up the entire width of parent and set margin on bottom */
+#searchInput {
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* When input gains focus, add a blue border below it */
+#searchInput:focus {
+  border-bottom: 2px solid #4575b6;
+}
+
+#delete_modal {
+  display: none;
+}
+
+.delete-show {
+  display: flex !important;
+}
+
+.blog-content {
+  overflow: hidden;
+  max-height: 8rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+
+pre {
+  display: block;
+  font-family: inherit !important;
+  white-space: pre-line;
+  margin: 1em 0;
+}/*# sourceMappingURL=app.css.map */

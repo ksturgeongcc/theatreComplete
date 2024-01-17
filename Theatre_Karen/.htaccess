@@ -1,0 +1,45 @@
+
+RewriteEngine On
+
+# Main Navigation
+# This will show a number but it will not give away the column name in your table
+# To have cleaner URL's is is better to use a framework
+
+# In PHP, the [L] flag at the end of a RewriteRule is used in conjunction with the Apache 
+# mod_rewrite module.
+
+# The [L] flag stands for "last" and is used to indicate that the current rule should 
+# be the last one applied if it matches. When mod_rewrite processes a URL, it goes through all of the RewriteRules in order, and if a rule matches, it will apply the corresponding rewrite and start over again with the modified URL.
+
+# By using the [L] flag, you can tell mod_rewrite to stop processing rules if the current
+#  rule matches, effectively preventing any further rewrites from being applied. 
+#  This can be useful in situations where you have multiple RewriteRules that could 
+#  potentially match a URL, but you only want one of them to be applied.
+
+# General rewrite
+RewriteRule ^login$ pages/login/index.php [L]
+RewriteRule ^register$ pages/register/index.php [L]
+RewriteRule ^blogs$ pages/blog/index.php [L]
+RewriteRule ^blogDetails/([0-9]+)$ pages/blog/details.php?blog_id=$1 [L]
+
+
+# User Navigation
+RewriteRule ^u/dashboard$ account/dashboard/user/index.php [L]
+RewriteRule ^u/comments$ account/dashboard/user/userComments.php [L]
+RewriteRule ^u/account$ account/dashboard/user/account.php [L]
+
+
+
+#Admin Navigation
+RewriteRule ^a/dashboard$ account/dashboard/admin/index.php [L]
+RewriteRule ^a/allUsers$ account/dashboard/admin/pages/user.php [L]
+RewriteRule ^a/addBlog$ account/dashboard/admin/pages/addBlog.php [L]
+RewriteRule ^a/pendingComments$ account/dashboard/admin/pages/pendingComments.php [L]
+RewriteRule ^a/commentDetails/([0-9]+)$ account/dashboard/admin/pages/commentDetails.php?cid=$1 [L]
+RewriteRule ^a/deleteUser/([0-9]+)$ account/dashboard/admin/components/deletePopup.php?uid=$1 [L]
+# RewriteRule ^a/deleteUserConfirm/([0-9]+)$ account/dashboard/admin/config/deleteUser.php?uid=$1 [L]
+RewriteRule ^a/deactivateUser/([0-9]+)$ account/dashboard/admin/config/deactivateUser.php?uid=$1 [L]
+RewriteRule ^a/activateUser/([0-9]+)$ account/dashboard/admin/config/activateUser.php?uid=$1 [L]
+RewriteRule ^a/editUser/([0-9]+)$ account/dashboard/admin/pages/editUser.php?uid=$1 [L]
+
+
