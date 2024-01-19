@@ -1,39 +1,59 @@
 <?php
-session_start();
     include '../../auth/dbConfig.php';
-    $uid = $_SESSION['id'];
     
-
-$targetDir = "images/";
-    $fileName = basename($_FILES["img_path"]["name"]);
-    $targetFilePath = $targetDir . $fileName;
-    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $targetDir = "images/";
+        $uploadedFile = $targetDir . basename($_FILES["img_path"]["name"]);
+        $uploadedDir = basename($_FILES["img_path"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($uploadedFile, PATHINFO_EXTENSION));
     
-    if(isset($_POST["submit"]) && !empty($_FILES["img_path"]["name"])){
-        // Allow certain file formats
-        $allowTypes = array('jpg','png','jpeg','gif','pdf');
-        if(in_array($fileType, $allowTypes)){
-            // Upload file to server
-            
-            if(move_uploaded_file($_FILES["img_path"]["tmp_name"], $targetFilePath)){
-                if ($_FILES["img_path"]["error"] > 0) {
-                    $statusMsg = "Error: " . $_FILES["img_path"]["error"];
-                }
-                // Insert image file name into database
-                $addProfileImg = $conn->prepare("UPDATE users set img_path = ? where id = $uid ");
-                $addProfileImg->bind_params('s', $_POST['img_path']);
-                $addProfileImg->execute();
-                if($addProfileImg){
-                    $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-                }else{
-                    $statusMsg = "File upload failed, please try again.";
-                } 
-            }else{
-                $statusMsg = "Sorry, there was an error uploading your file.";
-            }
-        }else{
-            $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+        // Check if file already exists
+        if (file_exists($uploadedFile)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
         }
-    }else{
-        $statusMsg = 'Please select a file to upload.';
+    
+        // Check file size (limit to 2MB)
+        if ($_FILES["img_path"]["size"] > 2 * 1024 * 1024) {
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+    
+        // Allow only certain file formats
+        $allowedFormats = array("jpg", "jpeg", "png", "gif", "pdf");
+        if (!in_array($imageFileType, $allowedFormats)) {
+            echo "Sorry, only JPG, JPEG, PNG, GIF, and PDF files are allowed.";
+            $uploadOk = 0;
+        }
+    
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            // Move the file to the target directory
+            if (move_uploaded_file($_FILES["img_path"]["tmp_name"], $uploadedFile)) {
+                // Save file path in the database
+                session_start();
+                include '../../auth/dbConfig.php'; // Include your database configuration file
+    
+                $uid = $_SESSION['id'];
+                $imgPath = $uploadedDir;
+    
+                // Update the 'img_path' column in the 'users' table for the specific user
+                $updateQuery = $conn->prepare("UPDATE users SET img_path = ? WHERE id = ?");
+                $updateQuery->bind_param('si', $imgPath, $uid);
+                
+                if ($updateQuery->execute()) {
+                    echo "The file " . htmlspecialchars(basename($_FILES["img_path"]["name"])) . " has been uploaded and the path has been saved in the database.";
+                } else {
+                    echo "Sorry, there was an error updating the database.";
+                }
+    
+                $updateQuery->close();
+                $conn->close();
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
     }

@@ -4,9 +4,9 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    // for use on laptop
-    define('ROOT_DIR', 'http://localhost//theatreComplete/Theatre_Karen/');
-    define('AUTH_DIR', 'http://localhost//theatreComplete/Theatre_Karen/account/dashboard/');
+    // for use on desktop
+    define('ROOT_DIR', 'http://localhost:8040/theatreComplete/Theatre_Karen/');
+    define('AUTH_DIR', 'http://localhost:8040/theatreComplete/Theatre_Karen/');
 // for use on college pc in room 13
     // define('ROOT_DIR', 'http://localhost/theatreV1/');
     // define('AUTH_DIR', 'http://localhost/theatreV1/account/dashboard/');
@@ -47,7 +47,7 @@
         <link rel="stylesheet" href="<?= ROOT_DIR ?>assets/scss/app.css">
 
     </head>
-<body class="bg-black">
+<body class="">
 
 <script src="//unpkg.com/alpinejs" defer></script>
 

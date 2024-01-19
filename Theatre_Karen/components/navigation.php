@@ -28,6 +28,7 @@ x-data="{open:false,menu:false, lokasi:false}">
                       <a href="<?= ROOT_DIR ?>u/comments" class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white hover:bg-purple-900 hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700 "> My reviews </a>
                       
                       <a href="<?= ROOT_DIR ?>u/dashboard" class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white hover:bg-purple-900 hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700 "> Dashboard </a>
+                      <a href="<?= ROOT_DIR ?>u/account" class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white hover:bg-purple-900 hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700 "> Account </a>
                     <?php endif ?>
                     <a href="<?= ROOT_DIR ?>account/auth/logout.php" class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-white hover:bg-purple-900 hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700 "> Logout </a>
                     <?php endif ?>
