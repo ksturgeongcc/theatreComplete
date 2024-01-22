@@ -5,20 +5,23 @@
     include '../../components/navigation.php';
     
 
-    $blog = $conn->prepare('SELECT 
+    $blog = $conn->prepare("SELECT 
 	
     b.id,
     b.title,
     b.blog_content,
     b.created_on,
     b.img_path,
-    b.show_name
+    b.show_name,
+    b.published
 
-   FROM blog b  ');
+   FROM blog b
+   
+   ORDER BY published");
 
 $blog->execute();
 $blog->store_result();
-$blog->bind_result($blogID, $blogTitle, $blogContent, $blogCreated, $imgPath, $showName);
+$blog->bind_result($blogID, $blogTitle, $blogContent, $blogCreated, $imgPath, $showName, $published);
 echo $blogID;
 ?>
 <div class="pt-12" style="background-image: url('https://cdn.pixabay.com/photo/2016/10/04/08/58/theater-1713815_960_720.jpg'); background-size: cover; background-position: center;">
@@ -91,14 +94,18 @@ echo $blogID;
           <?php if (isset($_SESSION['loggedin']) == TRUE && ($_SESSION['is_admin']) == 1): ?>
 
           <div class="mt-3 flex items-end justify-between">
-          
+          <?php if($published == 1) : ?>
             <div class="flex items-center space-x-1.5 rounded-lg bg-red-500 px-4 py-1.5 text-white duration-100 hover:bg-red-600">
-             
-            <button onclick="window.location.href='<?= ROOT_DIR ?>account/dashboard/admin/config/unpublishBlog.php?bid=<?= $blogID ?>';" class="text-sm">UNPUBLISH</button>
+               <button onclick="window.location.href='<?= ROOT_DIR ?>account/dashboard/admin/config/unpublishBlog.php?bid=<?= $blogID ?>';" class="text-sm">UNPUBLISH</button>
             </div>
-          </div>
-        
-          <?php endif ?>
+            <?php else : ?>
+
+            <div class="flex items-center space-x-1.5 rounded-lg bg-green-500 px-4 py-1.5 text-white duration-100 hover:bg-red-600">
+                <button onclick="window.location.href='<?= ROOT_DIR ?>account/dashboard/admin/config/publishBlog.php?bid=<?= $blogID ?>';" class="text-sm">PUBLISH</button>
+            </div>
+        <?php endif ?>
+          </div> 
+          <?php endif ?>     
         </div>
       
     </article>
