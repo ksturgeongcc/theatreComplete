@@ -9,7 +9,7 @@ if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
     exit('Password must be between 5 and 20 characters long!');
 }
 // We need to check if the account with that username exists.
-$stmt = $conn->prepare('SELECT id, password FROM theatre.users WHERE username = ? ');
+$stmt = $conn->prepare('SELECT id, password FROM users WHERE username = ? ');
 $stmt->bind_param('s', $_POST['username']);
 $stmt->execute();
 $stmt->store_result();
@@ -20,7 +20,7 @@ if ($stmt->num_rows > 0) {
 } else {
     $stmt->close();
     // Username doesnt exists, insert new account
-    $stmt = $conn->prepare("INSERT INTO theatre.users (username, email, password, active, is_admin) VALUES(?, ?, ?, 1, 0);");
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password, active, is_admin) VALUES(?, ?, ?, 1, 0);");
   
    
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
